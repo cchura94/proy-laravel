@@ -1,0 +1,11 @@
+1. Lista de comando de Laravel
+    php artisan list
+2. Levantar el servidor de Laravel
+    php artisan serve
+3. Generar un controlador
+    php artisan make:controller PersonaController
+4. Mostrar la lista de las rutas del proyecto
+    php artisan route:list
+
+5. Generar un Controlador con Recursos
+    php artisan make:controller ProductoController -r
