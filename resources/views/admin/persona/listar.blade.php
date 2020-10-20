@@ -1,1 +1,9 @@
-<h1>Listado de Personas</h1>
+@extends("layouts.sitio")
+
+@section("titulo", "Lista Personas")
+
+@section("contenedor")
+
+<h1>Lista de Personas</h1>
+
+@endsection
