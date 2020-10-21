@@ -8,12 +8,12 @@ class CategoriaController extends Controller
 {
     public function index()
     {
-        return "Lista de Categorias";
+        return view("admin.categoria.listar");
     }
 
     public function create()
     {
-        return "Formuario Nueva categoria";
+        return view("admin.categoria.nuevo");
     }
 
     public function store(Request $request)

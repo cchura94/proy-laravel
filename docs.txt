@@ -10,3 +10,12 @@
 
 5. Generar un Controlador con Recursos
     php artisan make:controller ProductoController -r
+
+
+6. Para migrar los archivos migration (tablas)
+    php artisan migrate
+
+7. Para verificar el estado de migraciones en la base de datos
+    php artisan migrate:status
+8. Para volver una version atra en la base de datos
+    php artisan migrate:rollback
