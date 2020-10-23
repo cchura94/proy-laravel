@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Models\Establecimiento;
 
 class EstablecimientoController extends Controller
 {
@@ -13,7 +15,9 @@ class EstablecimientoController extends Controller
      */
     public function index()
     {
-        //
+        //return DB::select("select * from establecimientos");
+        //return DB::table("Establecimientos")->get();
+        return Establecimiento::find(1);
     }
 
     /**

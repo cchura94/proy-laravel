@@ -19,3 +19,14 @@
     php artisan migrate:status
 8. Para volver una version atra en la base de datos
     php artisan migrate:rollback
+
+9. Geneara Migraciones 
+    php artisan make:migration create_establecimientos_table
+    php artisan make:migration establecimientos --create=establecimientos
+    php artisan make:migration add_telefono_to_establecimientos
+    php artisan make:migration telefono_est --table=establecimientos
+
+10. Generar models
+    php artisan make:model Establecimiento
+11. Generar models + migration
+    php artisan make:model Establecimiento -m
