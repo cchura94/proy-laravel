@@ -17,7 +17,12 @@ class EstablecimientoController extends Controller
     {
         //return DB::select("select * from establecimientos");
         //return DB::table("Establecimientos")->get();
-        return Establecimiento::find(1);
+        $establecimientos = Establecimiento::get();
+        //return response()->json($establecimientos, 200);
+
+        //return view("admin.establecimiento.listar", ["establecimientos" => $establecimientos]);
+        //return view("admin.establecimiento.listar")->with("establecimientos", $establecimientos);
+        return view("admin.establecimiento.listar", compact("establecimientos"));
     }
 
     /**
@@ -27,7 +32,7 @@ class EstablecimientoController extends Controller
      */
     public function create()
     {
-        //
+        return view("admin.establecimiento.nuevo");
     }
 
     /**
@@ -38,7 +43,21 @@ class EstablecimientoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Validación 
+        $request->validate([
+            "nombre" => "required|min:2|max:100",
+            "telefono" => "required|regex:/^\d{5,12}?$/"
+        ]);
+
+
+        //Guardar establecimiento
+        $est = new Establecimiento;
+        $est->nombre = $request->nombre;
+        $est->direccion = $request->direccion;
+        $est->telefono = $request->telefono;
+        $est->save();
+
+        return redirect("/establecimiento");
     }
 
     /**
