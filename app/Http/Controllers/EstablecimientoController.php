@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Establecimiento;
+use App\Models\Producto;
 
 class EstablecimientoController extends Controller
 {
@@ -58,7 +59,7 @@ class EstablecimientoController extends Controller
         $est->telefono = $request->telefono;
         $est->save();
 
-        return redirect("/establecimiento");
+        return redirect("/admin/establecimiento");
     }
 
     /**
@@ -69,7 +70,11 @@ class EstablecimientoController extends Controller
      */
     public function show($id)
     {
-        //
+        $est = Establecimiento::find($id);
+
+        $est->productos;
+        return view("admin.establecimiento.mostrar", compact("est"));
+        
     }
 
     /**
@@ -108,7 +113,7 @@ class EstablecimientoController extends Controller
         $est->telefono = $request->telefono;
         $est->save();
 
-        return redirect("/establecimiento");
+        return redirect("/admin/establecimiento");
     }
 
     /**
@@ -121,6 +126,20 @@ class EstablecimientoController extends Controller
     {
         $est = Establecimiento::find($id);
         $est->delete();
-        return redirect("/establecimiento");
+        return redirect("/admin/establecimiento");
+    }
+
+    public function agregar_producto($id_est, Request $request)
+    {
+        $prod = new Producto;
+        $prod->nombre = $request->nombre;
+        $prod->precio = $request->precio;
+        $prod->cantidad = $request->cantidad;
+        $prod->descripcion = $request->descripcion;
+        $prod->establecimiento_id = $id_est;
+        $prod->categoria_id = 1;
+        $prod->save();
+        return redirect("/admin/establecimiento")->with("ok", "Producto asignado al establecimiento");
+        
     }
 }
