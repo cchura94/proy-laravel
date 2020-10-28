@@ -1,4 +1,4 @@
-@extends("layouts.sitio")
+@extends("layouts.admin")
 @section("contenedor")
 
 <h1>Nuevo Establecimiento</h1>
@@ -16,13 +16,13 @@
 <form action="{{ route('establecimiento.store') }}" method="post">
     @csrf
     <label for="">Ingrese Nombre de establecimiento</label>
-    <input type="text" name="nombre" required>
+    <input type="text" name="nombre" required class="form-control">
 
     <label for="">Ingrese Dirección de establecimiento</label>
-    <input type="text" name="direccion">
+    <input type="text" name="direccion" class="form-control">
 
     <label for="">Ingrese Telefono</label>
-    <input type="text" name="telefono" required>
+    <input type="text" name="telefono" required class="form-control">
     
     <input type="submit">
 </form>

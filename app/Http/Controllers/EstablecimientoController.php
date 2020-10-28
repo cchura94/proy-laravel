@@ -17,7 +17,8 @@ class EstablecimientoController extends Controller
     {
         //return DB::select("select * from establecimientos");
         //return DB::table("Establecimientos")->get();
-        $establecimientos = Establecimiento::get();
+        //$establecimientos = Establecimiento::get();
+        $establecimientos = Establecimiento::paginate(4);
         //return response()->json($establecimientos, 200);
 
         //return view("admin.establecimiento.listar", ["establecimientos" => $establecimientos]);
@@ -79,7 +80,8 @@ class EstablecimientoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $est = Establecimiento::find($id);
+        return view("admin.establecimiento.editar", compact('est'));
     }
 
     /**
@@ -91,17 +93,34 @@ class EstablecimientoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
+        //Validación 
+        $request->validate([
+            "nombre" => "required|min:2|max:100",
+            "telefono" => "required|regex:/^\d{5,12}?$/"
+        ]);
+
+
+        //Modificar establecimiento
+        $est = Establecimiento::find($id);
+        $est->nombre = $request->nombre;
+        $est->direccion = $request->direccion;
+        $est->telefono = $request->telefono;
+        $est->save();
+
+        return redirect("/establecimiento");
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified resource frostorage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        $est = Establecimiento::find($id);
+        $est->delete();
+        return redirect("/establecimiento");
     }
 }
