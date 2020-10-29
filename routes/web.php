@@ -7,7 +7,9 @@ use App\Http\Controllers\ProductoController;
 use App\Models\Establecimiento;
 use Illuminate\Support\Facades\Route;
 
+use App\Models\Producto;
 
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('inicio');
 });
 
 Route::get("/saludo", function(){
@@ -52,7 +54,8 @@ Route::get("/nosotros", function(){
 });
 //   /productos
 Route::get("/productos", function(){
-    return view("productos");
+    $productos = Producto::All();
+    return view("productos", compact("productos"));
 });
 //   /servicios
 Route::get("/servicios", function(){
@@ -64,7 +67,7 @@ Route::get("/galeria", function(){
     return view("galeria");
 });
 
-Route::prefix('admin')->group(function () {
+Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::post("/establecimiento/{id}/agregar_producto", [EstablecimientoController::class, "agregar_producto"])->name("agregar_producto");
 
     //Rutas con controladores (persona)
